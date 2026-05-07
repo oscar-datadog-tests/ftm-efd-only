@@ -1,19 +1,19 @@
-# Per-fixture QA configuration. Fixtures override this file.
-# DO NOT change in the template; change only in spawned fixtures.
-
-description: "TEMPLATE — overridden by each fixture."
-instrumentation: native            # native | junit
-flake_rate: 0.0                    # probability each pooled test fails per run
-num_flaky_tests: 0
+description: "EFD on, PR Gate off. Drives §3.4 #3 and §5.2 #3/#4."
+instrumentation: native
+flake_rate: 0.20
+num_flaky_tests: 20
 num_stable_tests: 50
 include_failing_tests: false
 codeowners: true
-qa_target_branches: []
+qa_target_branches:
+    - "§3.4 #3 next-action — Next: Prevention. Add a PR Gate."
+    - "§5.2 #3 prevention verdict — EFD detecting flakes, but N merged."
+    - "§5.2 #4 prevention verdict — EFD active. Add a PR Gate."
 required_toggles:
-    efd: off
+    efd: on
     pr_gate: off
     atr: off
     policies: none
-    bits_proactive_prs: off
-warmup: "n/a — template has no warmup"
+    bits_proactive_prs: n/a
+warmup: "*/30 min for 14 days, then 0 */6 * * *. Ready T+14."
 datadog_org: "<fill-in-org-url>"
